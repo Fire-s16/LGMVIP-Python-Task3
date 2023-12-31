@@ -1,0 +1,32 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+def determine_winner(user_choice, computer_choice):
+    if user_choice == computer_choice:
+        return "Tie!"
+    elif (
+        (user_choice == "Rock" and computer_choice == "Scissors") or
+        (user_choice == "Paper" and computer_choice == "Rock") or
+        (user_choice == "Scissors" and computer_choice == "Paper")
+    ):
+        return "You win!"
+    else:
+        return "You lose!"
+def on_button_click(user_choice):
+    computer_choice = random.choice(["Rock", "Paper", "Scissors"])
+    result = determine_winner(user_choice, computer_choice)
+    messagebox.showinfo("Result", f"Computer chose {computer_choice}\n{result}")
+    
+root = tk.Tk()
+root.title("Rock, Paper, Scissors Game")
+label = tk.Label(root, text="Choose Rock, Paper, or Scissors:")
+label.pack(pady=10)
+button_rock = tk.Button(root, text="Rock", command=lambda: on_button_click("Rock"))
+button_rock.pack(pady=5)
+button_paper = tk.Button(root, text="Paper", command=lambda: on_button_click("Paper"))
+button_paper.pack(pady=5)
+button_scissors = tk.Button(root, text="Scissors", command=lambda: on_button_click("Scissors"))
+button_scissors.pack(pady=5)
+quit_button = tk.Button(root, text="Quit", command=root.destroy)
+quit_button.pack(pady=10)
+root.mainloop()
